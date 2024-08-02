@@ -7,7 +7,7 @@ void Display_Elements(int array[Total_size]);
 void Search_Element(int array[Total_size]);
 void Sort_Array(int array[Total_size]);
 int main() {
-    int array[Total_size], choice;
+    int array[Total_size], choice1, choice2;
 
     printf("\n\nEnter the size of the array: ");
     scanf("%d", &Total_size);
@@ -32,10 +32,10 @@ int main() {
         printf("5. Sort Array\n");
         printf("0. TO EXIT...\n");
         printf("\nYour Choice : ");
-        scanf("%d", &choice);
+        scanf("%d", &choice1);
         printf("\n");
 
-        switch (choice) {
+        switch (choice1) {
         case 1:
             Insert_Element(array);
             break;
@@ -59,7 +59,7 @@ int main() {
             printf("\nInvalid choice. Please try again.\n");
             break;
         }
-        } while (choice != 0);
+        } while (choice1 != 0);
     }
     printf("\n\n");
     return 0;
@@ -175,19 +175,39 @@ void Search_Element(int array[Total_size]) {
 
 void Sort_Array(int array[Total_size]) {
     int i, j, temp;
+    char choice2;
     if (FullOrEmpty() == 0) {
         printf("\nArray is empty. No elements to sort.\n");
     } 
     else {
-        for (i = 0; i < Current_size - 1; i++) {
-            for (j = 0; j < Current_size - i - 1; j++) {
-                if (array[j] > array[j + 1]) {
-                    temp = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = temp;
+        printf("Ascending or Descending order (A/D): ");
+        scanf("%s", &choice2);
+        if (choice2 == 'A' || choice2 == 'a'){
+            for (i = 0; i < Current_size - 1; i++) {
+                for (j = 0; j < Current_size - i - 1; j++) {
+                    if (array[j] > array[j + 1]) {
+                        temp = array[j];
+                        array[j] = array[j + 1];
+                        array[j + 1] = temp;
+                    }
                 }
             }
         }
+        else if (choice2 == 'D' || choice2 == 'd'){
+            for (i = 0; i < Current_size - 1; i++) {
+                for (j = 0; j < Current_size - i - 1; j++) {
+                    if (array[j] < array[j + 1]) {
+                        temp = array[j];
+                        array[j] = array[j + 1];
+                        array[j + 1] = temp;
+                    }
+                }
+            }
+        }
+        else {
+            printf("\nInvalid choice for sorting order. Please choose A or D.\n");
+        }
+        
         printf("\nSorted array: ");
         for (i = 0; i < Current_size; i++) {
             printf("%d ", array[i]);
