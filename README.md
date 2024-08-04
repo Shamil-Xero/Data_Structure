@@ -1,1 +1,1 @@
-These are just some random C programs that I had to write for my Data Structure class in my College
+These are just some random C programs that I wrote in my free time for my classes in my College
