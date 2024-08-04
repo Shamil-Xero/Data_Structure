@@ -1,16 +1,17 @@
 #include<stdio.h>
 int Total_size, Current_size = 0;
 
-void Insert_Element(int array[Total_size]);
-void Delete_Element(int array[Total_size]);
-void Display_Elements(int array[Total_size]);
-void Search_Element(int array[Total_size]);
-void Sort_Array(int array[Total_size]);
+void Insert_Element(int array[]);
+void Delete_Element(int array[]);
+void Display_Elements(int array[]);
+void Search_Element(int array[]);
+void Sort_Array(int array[]);
 int main() {
-    int array[Total_size], choice1, choice2;
+    int choice1, choice2;
 
     printf("\n\nEnter the size of the array: ");
     scanf("%d", &Total_size);
+    int array[Total_size];
 
     if (Total_size == 0) {
         printf("\nSorry, Cannot create empty array :(\n");
@@ -129,6 +130,15 @@ void Delete_Element(int array[Total_size]) {
         printf("\nEnter the position where you want to delete the element: ");
         scanf("%d", &position);
 
+        if (position > Current_size) {
+            printf("\nDeleted the last element\n");
+            position = Current_size;
+        }
+        else if (position < 1){
+            printf("\nDeleted the first element\n");
+            position = 1;
+        }
+
         for (i = position - 1; i < Total_size - 1; i++) {
             array[i] = array[i + 1];
         }
@@ -139,6 +149,7 @@ void Delete_Element(int array[Total_size]) {
         for (i = 0; i < Current_size; i++) {
             printf("%d ", array[i]);
         }
+        printf("\n");
     }
 }
 
@@ -162,14 +173,20 @@ void Search_Element(int array[Total_size]) {
         printf("\nArray is empty. No elements to search.\n");
     }
     else {
-        int i, search_element;
+        int i, search_element, found_element = 0;
         printf("\nEnter the element to search: ");
         scanf("%d", &search_element);
         for (i = 0; i < Current_size; i++){
-        if (array[i] == search_element) {
-            printf("\nThe element %d is found on position no %d\n\n\n", search_element, i+1);
+            if (array[i] == search_element) {
+                printf("\nThe element %d is found on position no %d\n\n\n", search_element, i+1);
+                found_element = 1;
+            }
         }
+        if (found_element == 0)
+        {
+            printf("\nThe element %d is not found in the array.\n\n\n", search_element);
         }
+            
     }
 }
 
