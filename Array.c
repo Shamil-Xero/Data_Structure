@@ -1,5 +1,5 @@
 #include<stdio.h>
-int Total_size, Current_size = 0;
+int Total_size, Current_size = 0, choice1, choice2;
 
 void Insert_Element(int array[]);
 void Delete_Element(int array[]);
@@ -7,14 +7,13 @@ void Display_Elements(int array[]);
 void Search_Element(int array[]);
 void Sort_Array(int array[]);
 int main() {
-    int choice1, choice2;
 
     printf("\n\nEnter the size of the array: ");
     scanf("%d", &Total_size);
     int array[Total_size];
 
-    if (Total_size == 0) {
-        printf("\nSorry, Cannot create empty array :(\n");
+    if (Total_size <= 0) {
+        printf("\nSorry, Cannot create array :(\n");
     } else {
         printf("Enter the %d elements:\n", Total_size);
         for (int i = 0; i < Total_size; i++) {
@@ -23,43 +22,42 @@ int main() {
         }
         Display_Elements(array);
 
-        do
-        {    
-        printf("\nOperations to do on the Array:\n\n");
-        printf("1. Insert Element\n");
-        printf("2. Delete Element\n");
-        printf("3. Search Element\n");
-        printf("4. Display Elements\n");
-        printf("5. Sort Array\n");
-        printf("0. TO EXIT...\n");
-        printf("\nYour Choice : ");
-        scanf("%d", &choice1);
-        printf("\n");
+        do{    
+            printf("\nOperations to do on the Array:\n\n");
+            printf("1. Insert Element\n");
+            printf("2. Delete Element\n");
+            printf("3. Search Element\n");
+            printf("4. Display Elements\n");
+            printf("5. Sort Array\n");
+            printf("0. TO EXIT...\n");
+            printf("\nYour Choice : ");
+            scanf("%d", &choice1);
+            printf("\n");
 
-        switch (choice1) {
-        case 1:
-            Insert_Element(array);
-            break;
-        case 2:
-            Delete_Element(array);
-            break;
-        case 3:
-            Search_Element(array);
-            break;
-        case 4:
-            Display_Elements(array);
-            break;
-        case 5:
-            Sort_Array(array);
-            break;
-        case 0:
-            printf("\nExiting the program...\n");
-            break;
+            switch (choice1) {
+                case 1:
+                    Insert_Element(array);
+                    break;
+                case 2:
+                    Delete_Element(array);
+                    break;
+                case 3:
+                    Search_Element(array);
+                    break;
+                case 4:
+                    Display_Elements(array);
+                    break;
+                case 5:
+                    Sort_Array(array);
+                    break;
+                case 0:
+                    printf("\nExiting the program...\n");
+                    break;
 
-        default:
-            printf("\nInvalid choice. Please try again.\n");
-            break;
-        }
+                default:
+                    printf("\nInvalid choice. Please try again.\n");
+                    break;
+            }
         } while (choice1 != 0);
     }
     printf("\n\n");
@@ -68,22 +66,20 @@ int main() {
 
 int FullOrEmpty() {
     if (Total_size == Current_size) {
-        // printf("Array is full!\n");
+        printf("Array is full!");
         return 1;
     } else if (Current_size == 0) {
-        // printf("Array is Empty!\n");
+        printf("Array is Empty!");
         return 0;
-    }
-    else {
+    } else {
         return Current_size;
     }
 }
 
 void Insert_Element(int array[Total_size]) {
     if (FullOrEmpty() == 1) {
-        printf("\nArray is full. Cannot insert element.\n");
-    } 
-    else {
+        printf(" Cannot insert element.\n");
+    } else {
         int i, position, value;
 
         printf("\nEnter the position where you want to insert the element: ");
@@ -92,24 +88,21 @@ void Insert_Element(int array[Total_size]) {
         printf("\nEnter the value to insert: ");
         scanf("%d", &value);
 
+        
         if (position < 1){
-            position = 0;
+            position = 1;
             printf("\nAdded the element at the Start\n");
+        } 
+        else if (position > Current_size) {
+            position = Current_size;
+            printf("\nAdded the element at the end\n");
         }
 
-        for (i = Total_size - 1; i >= position - 1; i--) {
+        for (i = Current_size - 1; i >= position - 1; i--) {
             array[i + 1] = array[i];
         }
 
-        if (position > Current_size) {
-            printf("\nAdded the element at the end\n");
-            array[Current_size] = value;
-        }
-        else if (position < 1){
-            array[0] = value;
-        } else {
-            array[position - 1] = value;
-        }
+        array[position - 1] = value;
 
         Current_size++;
 
@@ -122,7 +115,7 @@ void Insert_Element(int array[Total_size]) {
 
 void Delete_Element(int array[Total_size]) {
     if (FullOrEmpty() == 0) {
-        printf("\nArray is empty. Cannot delete element.\n");
+        printf(" Cannot delete element.\n");
     } 
     else {
         int i, position;
@@ -155,7 +148,7 @@ void Delete_Element(int array[Total_size]) {
 
 void Display_Elements(int array[Total_size]) {
     if (FullOrEmpty() == 0) {
-        printf("\nArray is empty. No elements to display.\n");
+        printf(" No elements to display.\n");
     } 
     else {
         printf("\nElements in the array: ");
@@ -170,7 +163,7 @@ void Display_Elements(int array[Total_size]) {
 void Search_Element(int array[Total_size]) {
 
     if (FullOrEmpty() == 0) {
-        printf("\nArray is empty. No elements to search.\n");
+        printf(" No elements to search.\n");
     }
     else {
         int i, search_element, found_element = 0;
@@ -178,7 +171,7 @@ void Search_Element(int array[Total_size]) {
         scanf("%d", &search_element);
         for (i = 0; i < Current_size; i++){
             if (array[i] == search_element) {
-                printf("\nThe element %d is found on position no %d\n\n\n", search_element, i+1);
+                printf("\nThe element %d is found on position no %d\n\n", search_element, i+1);
                 found_element = 1;
             }
         }
@@ -194,7 +187,7 @@ void Sort_Array(int array[Total_size]) {
     int i, j, temp;
     char choice2;
     if (FullOrEmpty() == 0) {
-        printf("\nArray is empty. No elements to sort.\n");
+        printf(" No elements to sort.\n");
     } 
     else {
         printf("Ascending or Descending order (A/D): ");
