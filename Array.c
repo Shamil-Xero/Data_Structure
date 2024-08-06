@@ -103,13 +103,9 @@ void Insert_Element(int array[Total_size]) {
         }
 
         array[position - 1] = value;
-
         Current_size++;
 
-        printf("\nResultant array: ");
-        for (i = 0; i < Current_size; i++) {
-            printf("%d ", array[i]);
-        }
+        Display_Elements(array);
     }
 }
 
@@ -138,27 +134,10 @@ void Delete_Element(int array[Total_size]) {
 
         Current_size--;
 
-        printf("\nResultant array: ");
-        for (i = 0; i < Current_size; i++) {
-            printf("%d ", array[i]);
-        }
-        printf("\n");
+        Display_Elements(array);
     }
 }
 
-void Display_Elements(int array[Total_size]) {
-    if (FullOrEmpty() == 0) {
-        printf(" No elements to display.\n");
-    } 
-    else {
-        printf("\nElements in the array: ");
-        for (int i = 0; i < Current_size; i++) {
-            printf("%d ", array[i]);
-        }
-        printf("\nCurrent_Size: %d", Current_size);
-        printf("\nTotal_Size: %d\n", Total_size);
-    }
-}
 
 void Search_Element(int array[Total_size]) {
 
@@ -219,8 +198,19 @@ void Sort_Array(int array[Total_size]) {
         }
         
         printf("\nSorted array: ");
-        for (i = 0; i < Current_size; i++) {
+        Display_Elements(array);
+    }
+}
+
+void Display_Elements(int array[Total_size]) {
+    if (FullOrEmpty() == 0) {
+        printf(" No elements to display.\n");
+    } 
+    else {
+        printf("\nElements in the array: ");
+        for (int i = 0; i < Current_size; i++) {
             printf("%d ", array[i]);
         }
+        printf("\nCurrent_Size: %d", Current_size);
     }
 }
