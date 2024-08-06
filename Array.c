@@ -1,5 +1,5 @@
 #include<stdio.h>
-int Total_size, Current_size = 0, choice1, choice2;
+int Total_size, Current_size = 0, choice1;
 
 void Insert_Element(int array[]);
 void Delete_Element(int array[]);
