@@ -3,9 +3,9 @@ int Total_size, Current_size = 0, choice1, choice2;
 
 void Insert_Element(int array[]);
 void Delete_Element(int array[]);
-void Display_Elements(int array[]);
 void Search_Element(int array[]);
 void Sort_Array(int array[]);
+void Display_Elements(int array[]);
 int main() {
 
     printf("\n\nEnter the size of the array: ");
