@@ -171,21 +171,18 @@ void Sort_Array(int array[Total_size]) {
     }
     printf("Ascending or Descending order (A/D): ");
     scanf("%s", &choice2);
-    if (choice2 == 'A' || choice2 == 'a'){
-        order = 'a';
-    } else if (choice2 == 'D' || choice2 == 'd') {
-        order = 'd';
-    } else {
+    if (choice2 != 'A' || choice2 != 'a' || choice2 != 'D' || choice2 != 'd') {
         printf("\nInvalid choice. Please try again.\n");
+        return;
     }
 
     for (i = 0; i < Current_size - 1; i++) {
         for (j = 0; j < Current_size - i - 1; j++) {
-            if (order == 'a' && array[j] > array[j + 1]) {
+            if (choice2 == 'A' || choice2 == 'a' && array[j] > array[j + 1]) {
                 temp = array[j];
                 array[j] = array[j + 1];
                 array[j + 1] = temp;
-            } else if (order == 'd' && array[j] < array[j + 1]) {
+            } else if (choice2 == 'D' || choice2 == 'd' && array[j] < array[j + 1]) {
                 temp = array[j];
                 array[j] = array[j + 1];
                 array[j + 1] = temp;
