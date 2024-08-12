@@ -195,8 +195,8 @@ void SortNodes() {
             temp = current->data;
             current->data = min->data;
             min->data = temp;
-            printf("\nLinked list sorted in ascending order.\n");
         }
+        printf("\nLinked list sorted in ascending order.\n");
     }else if (order == 'D') {
         for (current = head; current!= NULL; current = current->next) {
             min = current;
@@ -208,8 +208,8 @@ void SortNodes() {
             temp = current->data;
             current->data = min->data;
             min->data = temp;
-            printf("\nLinked list sorted in descending order.\n");
         }
+        printf("\nLinked list sorted in descending order.\n");
     }else {
         printf("\nInvalid order. Please enter 'A' for ascending or 'D' for descending.\n");
         return;
