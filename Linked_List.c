@@ -11,8 +11,9 @@ struct node *head;
 void CreateHeadNode();
 void InsertNode();
 void DeleteNode();
-void DisplayList();
+void DisplayNodes();
 void SearchNode();
+void SortNodes();
 
 void main() {
     int choice;
@@ -21,8 +22,9 @@ void main() {
     do{
         printf("\n\n1. Insert a node\n");
         printf("2. Delete a node\n");
-        printf("3. Display the list\n");
+        printf("3. Display the nodes\n");
         printf("4. Search for a node\n");
+        printf("5. Sort the nodes\n");
         printf("0. Exit...\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -34,10 +36,13 @@ void main() {
                 DeleteNode();
                 break;
             case 3:
-                DisplayList();
+                DisplayNodes();
                 break;
             case 4:
                 SearchNode();
+                break;
+            case 5:
+                SortNodes();
                 break;
             case 0:
                 printf("\nExiting...\n\n");
@@ -48,6 +53,16 @@ void main() {
     } while (choice != 0);
 }
 
+void DisplayNodes(){
+    printf("\n\n--------------------------------\n");
+    struct node *current = head;
+    printf("Linked List: ");
+    while(current != NULL){
+        printf("%d -> ", current->data);
+        current = current->next;
+    }
+    printf("NULL\n");
+}
 
 void CreateHeadNode(){
     printf("\n\n--------------------------------\n");
@@ -108,7 +123,7 @@ void InsertNode(){
             printf("\nPosition Out of range! So node inserted at the end\n");
         }
     }
-    DisplayList();
+    DisplayNodes();
 }
 
 void DeleteNode(){
@@ -137,7 +152,7 @@ void DeleteNode(){
     }
     free(current);
     printf("\nNode on position %d is deleted\n", position);
-    DisplayList();
+    DisplayNodes();
 }
 
 void SearchNode(){
@@ -161,13 +176,45 @@ void SearchNode(){
     }
 }
 
-void DisplayList(){
-    printf("\n\n--------------------------------\n");
-    struct node *current = head;
-    printf("Linked List: ");
-    while(current != NULL){
-        printf("%d -> ", current->data);
-        current = current->next;
+void SortNodes() {
+    printf("--------------------------------\n");
+    printf("Ascending or descending order (A/D): ");
+    char order;
+    scanf(" %c", &order);
+    printf("\nSorting the linked list...\n");
+    struct node *current, *next, *min;
+    int temp;
+    if (order == 'A') {
+        for (current = head; current!= NULL; current = current->next) {
+            min = current;
+            for (next = current->next; next!= NULL; next = next->next) {
+                if (next->data < min->data) {
+                    min = next;
+                }
+            }
+            temp = current->data;
+            current->data = min->data;
+            min->data = temp;
+            printf("\nLinked list sorted in ascending order.\n");
+        }
+    }else if (order == 'D') {
+        for (current = head; current!= NULL; current = current->next) {
+            min = current;
+            for (next = current->next; next!= NULL; next = next->next) {
+                if (next->data > min->data) {
+                    min = next;
+                }
+            }
+            temp = current->data;
+            current->data = min->data;
+            min->data = temp;
+            printf("\nLinked list sorted in descending order.\n");
+        }
+    }else {
+        printf("\nInvalid order. Please enter 'A' for ascending or 'D' for descending.\n");
+        return;
     }
-    printf("NULL\n");
+    
+    DisplayNodes();
 }
+
