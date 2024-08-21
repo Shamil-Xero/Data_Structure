@@ -311,9 +311,9 @@ void ReverseLinkedList()
 {
     printf("--------------------------------\n");
     printf("\nReversing the linked list...\n");
-    struct node *current = head, *temp;
-    tail = current;
-    for (current = head; current != NULL; current = current->prev)
+    struct node *current, *temp;
+    tail = head;
+    for (current = tail; current != NULL; current = current->prev)
     {
         temp = current->next;
         current->next = current->prev;
