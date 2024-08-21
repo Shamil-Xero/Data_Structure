@@ -11,7 +11,7 @@ struct node *head, *tail;
 void CreateHeadNode();
 void InsertNode();
 void DeleteNode();
-void DisplayNodes(struct node *);
+void DisplayNodes();
 void SearchNode();
 void SortNodes();
 void ReverseLinkedList();
@@ -40,7 +40,7 @@ void main() {
                 DeleteNode();
                 break;
             case 3:
-                DisplayNodes(head);
+                DisplayNodes();
                 break;
             case 4:
                 SearchNode();
@@ -63,7 +63,7 @@ void main() {
     } while (choice != 0);
 }
 
-void DisplayNodes(struct node *head){
+void DisplayNodes(){
     printf("\n\n--------------------------------\n");
     struct node *current = head;
     printf("Linked List: ");
@@ -84,8 +84,7 @@ void CreateHeadNode(){
         return;
     }
     scanf("%d", &head->data);
-    head->next = NULL;
-    head->prev = NULL;
+    head->prev = head->next = NULL;
     tail = head;
     printf("Head node created with data: %d\n", head->data);
     printf("\n\n--------------------------------\n");
@@ -138,7 +137,7 @@ void InsertNode(){
             printf("\nPosition Out of range! So no node was inserted\n");
         }
     }
-    DisplayNodes(head);
+    DisplayNodes();
 }
 
 void DeleteNode(){
@@ -184,7 +183,7 @@ void DeleteNode(){
         }
     }
     free(current);
-    DisplayNodes(head);
+    DisplayNodes();
 }
 
 void SearchNode(){
@@ -248,7 +247,7 @@ void SortNodes() {
         return;
     }
     
-    DisplayNodes(head);
+    DisplayNodes();
 }
 
 void ReverseLinkedList(){
@@ -262,7 +261,7 @@ void ReverseLinkedList(){
         current->prev = temp;
         head = current;
     }
-    DisplayNodes(head);
+    DisplayNodes();
 }
 
 void CloneLinkedList(){
@@ -277,10 +276,8 @@ void CloneLinkedList(){
         }
         new->data = current->data;
         if(cloned_head == NULL && cloned_tail == NULL){    
-            new->next = NULL;
-            new->prev = NULL;
-            cloned_head = new;
-            cloned_tail = new;
+            new->prev = new->next = NULL;
+            cloned_tail = cloned_head = new;
         } else {
             new->next = NULL;
             new->prev = cloned_tail;
@@ -288,24 +285,8 @@ void CloneLinkedList(){
             cloned_tail = new;
         }
     }
-    // printf("\ncloned_head->prev - %d", cloned_head->prev);
-    // printf("\ntail - %d", tail);
     cloned_head->prev = tail;
     tail->next = cloned_head;
     tail = cloned_tail;
-    
-    // DisplayNodes(cloned_head);
-    // printf("\ntail->next - %d", tail->next);
-    // printf("\ncloned_head - %d", cloned_head);
-    
-    // printf("\ntail - %d", head->next);
-    // printf("\ncloned_tail - %d", cloned_tail);
-    // printf("\ncloned_head->prev - %d", cloned_head->prev);
-    // printf("\ntail - %d", tail);
-    // printf("\ntail->next - %d", tail->next);
-    // printf("\ncloned_head - %d", cloned_head);
-    // printf("\ntail - %d", head->next);
-    // printf("\ncloned_head - %d", cloned_head);
-    // printf("\nLinked list cloned successfully.\n");
-    DisplayNodes(head);
+    DisplayNodes();
 }
