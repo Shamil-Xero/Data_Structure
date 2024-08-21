@@ -62,6 +62,7 @@ void DisplayNodes(){
         current = current->next;
     }
     printf("NULL\n");
+    printf("\n\n--------------------------------\n");
 }
 
 void CreateHeadNode(){
@@ -75,6 +76,7 @@ void CreateHeadNode(){
     scanf("%d", &head->data);
     head->next = NULL;
     printf("Head node created with data: %d\n", head->data);
+    printf("\n\n--------------------------------\n");
 }
 
 void InsertNode(){
@@ -219,4 +221,3 @@ void SortNodes() {
     
     DisplayNodes();
 }
-
