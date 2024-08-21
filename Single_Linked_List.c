@@ -58,7 +58,7 @@ void DisplayNodes(){
     struct node *current = head;
     printf("Linked List: ");
     while(current != NULL){
-        printf("%d -> ", current->data);
+        printf("(%d)%d(%d) -> ", current, current->data, current->next);
         current = current->next;
     }
     printf("NULL\n");
@@ -79,7 +79,7 @@ void CreateHeadNode(){
 
 void InsertNode(){
     printf("--------------------------------\n");
-    printf("\nEnter the position of the node(-1 to add at the end): ");
+    printf("\nEnter the position of the node (-1 to add at the end): ");
     int position, i;
     scanf("%d", &position);
     printf("\nEnter the data of the node: ");
@@ -124,7 +124,7 @@ void InsertNode(){
 
 void DeleteNode(){
     printf("--------------------------------\n");
-    printf("Enter the position of the node to delete(-1 to delete the last node): ");
+    printf("Enter the position of the node to delete (-1 to delete the last node): ");
     int position;
     scanf("%d", &position);
     struct node *current = head, *previous;
@@ -139,7 +139,7 @@ void DeleteNode(){
         previous->next = NULL;
         printf("Last node is deleted\n");
     } else {
-        for (int i = 1; i<position; i++ ){
+        for (int i = 1; i < position; i++){
             previous = current;
             current = current->next;
             if (current == NULL){
