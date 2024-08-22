@@ -3,6 +3,7 @@ int top = -1, MAX;
 
 void Push();
 void Pop();
+void Peek();
 void Display();
 
 int main() {
@@ -10,7 +11,7 @@ int main() {
     scanf("%d", &MAX);
     int stack[MAX],choice;
     do{
-        printf("\n1. Push\n2. Pop\n3. Display\n0. Exit\n");
+        printf("\n1. Push\n2. Pop\n3. Peek\n4. Display\n0. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         
@@ -22,6 +23,9 @@ int main() {
                 Pop(stack);
                 break;
             case 3:
+                Peek(stack);
+                break;
+            case 4:
                 Display(stack);
                 break;
             case 0:
@@ -48,6 +52,14 @@ void Pop(int stack[]){
         printf("Stack Underflow! Cannot pop an element.\n");
     } else {
         printf("Popped element: %d\n", stack[top--]);
+    }
+}
+
+void Peek(int stack[]){
+    if (top == -1) {
+        printf("Stack is empty. Nothing to peek.\n");
+    } else {
+        printf("Top element: %d\n", stack[top]);
     }
 }
 
