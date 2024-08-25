@@ -15,7 +15,6 @@ struct Node* SortPolynomial(struct Node*);
 struct Node*  AddPolynomial();
 void ShowPolynomial(struct Node*);
 
-// Function to create new node
 struct Node* CreateNode(struct Node *poly)
 {
     int x, y;
@@ -44,7 +43,6 @@ struct Node* CreateNode(struct Node *poly)
         }
         current->next = new;
     }
-    // printf("\n%d\t%d\t%d\t%d\t%d", new);
     poly = SortPolynomial(poly);
     return poly;
 }
@@ -68,67 +66,103 @@ struct Node* SortPolynomial(struct Node *poly){
     return poly;
 }
 
-struct Node*  AddPolynomial()
+struct Node* AddPolynomial(struct Node* poly1, struct Node* poly2)
 {
-    struct Node *poly3 = (struct Node*)malloc(sizeof(struct Node)), *poly;
-    poly3->next = NULL;
-    poly = poly3;
-    while (poly1->next!=NULL && poly2->next!=NULL)
+    struct Node *poly3 = NULL, *current = NULL;
+
+    while (poly1 != NULL && poly2 != NULL)
     {
+        struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
+
+        if (newNode == NULL)
+        {
+            printf("\nMemory error\n");
+            exit(0);
+        }
+
         if (poly1->pow > poly2->pow)
         {
-            poly3->pow = poly1->pow;
-            poly3->coeff = poly1->coeff;
+            newNode->pow = poly1->pow;
+            newNode->coeff = poly1->coeff;
             poly1 = poly1->next;
         }
-
         else if (poly1->pow < poly2->pow)
         {
-            poly3->pow = poly2->pow;
-            poly3->coeff = poly2->coeff;
+            newNode->pow = poly2->pow;
+            newNode->coeff = poly2->coeff;
             poly2 = poly2->next;
         }
-
         else
         {
-            poly3->pow = poly1->pow;
-            poly3->coeff = poly1->coeff + poly2->coeff;
+            newNode->pow = poly1->pow;
+            newNode->coeff = poly1->coeff + poly2->coeff;
             poly1 = poly1->next;
             poly2 = poly2->next;
         }
 
-        poly3->next = (struct Node *)malloc(sizeof(struct Node));
-        poly3 = poly3->next;
-        poly3->next = NULL;
+        newNode->next = NULL;
+
+        if (poly3 == NULL)
+        {
+            poly3 = newNode;
+            current = poly3;
+        }
+        else
+        {
+            current->next = newNode;
+            current = current->next;
+        }
     }
-    while (poly1->next!=NULL || poly2->next!=NULL)
+
+    while (poly1 != NULL)
     {
-        if (poly1->next!=NULL)
-        {
-            poly3->pow = poly1->pow;
-            poly3->coeff = poly1->coeff;
-            poly1 = poly1->next;
-        }
-        if (poly2->next!=NULL)
-        {
-            poly3->pow = poly2->pow;
-            poly3->coeff = poly2->coeff;
-            poly2 = poly2->next;
-        }
-        poly3->next = (struct Node *)malloc(sizeof(struct Node));
-        poly3 = poly3->next;
-        poly3->next = NULL;
-    }
-    return poly;
-}
+        struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
 
+        if (newNode == NULL)
+        {
+            printf("\nMemory error\n");
+            exit(0);
+        }
+
+        newNode->pow = poly1->pow;
+        newNode->coeff = poly1->coeff;
+        newNode->next = NULL;
+
+        current->next = newNode;
+        current = current->next;
+
+        poly1 = poly1->next;
+    }
+
+    while (poly2 != NULL)
+    {
+        struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
+
+        if (newNode == NULL)
+        {
+            printf("\nMemory error\n");
+            exit(0);
+        }
+
+        newNode->pow = poly2->pow;
+        newNode->coeff = poly2->coeff;
+        newNode->next = NULL;
+
+        current->next = newNode;
+        current = current->next;
+
+        poly2 = poly2->next;
+    }
+
+    return poly3;
+}
 void ShowPolynomial(struct Node *poly)
 {
     while (poly != NULL)
     {
         printf("%dx^%d", poly->coeff, poly->pow);
         if (poly->next != NULL){
-                printf("+");
+                printf(" + ");
         }
         poly = poly->next;
     }
@@ -136,6 +170,7 @@ void ShowPolynomial(struct Node *poly)
 
 int main()
 {
+    printf("\n====================================================\n");
     printf("Enter the coefficients and powers for the first poly: \n");
     while (1)
     {
@@ -160,8 +195,9 @@ int main()
     ShowPolynomial(poly1);
     printf("\nSecond polynomial: ");
     ShowPolynomial(poly2);
-    // poly3 = AddPolynomial();
-    // printf("\nResultant poly: ");
-    // ShowPolynomial(poly3);
+    printf("\nResultant poly: ");
+    poly3 = AddPolynomial(poly1, poly2);
+    ShowPolynomial(poly3);
+    printf("\n================================================\n");
     return 0;
 }
