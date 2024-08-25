@@ -7,7 +7,7 @@ struct node
     struct node *next;
 };
 
-struct node *head;
+struct node *head, *tail;
 
 void CreateHeadNode();
 void InsertNode();
@@ -284,7 +284,12 @@ void CloneLinkedList()
 {
     printf("--------------------------------\n");
     printf("\nCloning the linked list...\n");
-    struct node *current, *new, *cloned_head = NULL;
+    struct node *current = head, *new, *cloned_head = NULL, *cloned_tail = NULL;
+    while (current->next != NULL)
+    {
+        current = current->next;
+    }
+    tail = current;
     for (current = head; current != NULL; current = current->next)
     {
         new = (struct node *)malloc(sizeof(struct node));
@@ -294,20 +299,58 @@ void CloneLinkedList()
             return;
         }
         new->data = current->data;
-        if (cloned_head == NULL)
+        if (cloned_head == NULL && cloned_tail == NULL)
         {
             new->next = NULL;
-            cloned_head = new;
+            cloned_tail = cloned_head = new;
         }
         else
         {
             new->next = NULL;
+            cloned_tail->next = new;
+            cloned_tail = new;
         }
     }
-    for (current = head; current->next != NULL; current = current->next)
-        {
-            continue;
-        }
-        current->next = new;
+    tail->next = cloned_head;
+    tail = cloned_tail;
     DisplayNodes();
 }
+
+/*
+void CloneLinkedList(){
+    printf("--------------------------------\n");
+    printf("\nCloning the linked list...\n");
+    struct node *current = head, *new, *temp;
+    while(current->next != NULL){
+        current = current->next;
+        // printf("%d", current->data);
+    }
+    temp = tail = current;
+    current = head;
+    while(current!=temp){
+        new = (struct node *)malloc(sizeof(struct node));
+        if (new == NULL)
+        {
+            printf("Memory error!\n");
+            return;
+        }
+        new->data = current->data;
+        new->next = NULL;
+        tail->next = new;
+        tail = new;
+        current = current->next;
+    }
+    new = (struct node *)malloc(sizeof(struct node));
+        if (new == NULL)
+        {
+            printf("Memory error!\n");
+            return;
+        }
+    new->data = current->data;
+    new->next = NULL;
+    tail->next = new;
+    tail = new;
+    DisplayNodes();
+    return;
+}
+*/
