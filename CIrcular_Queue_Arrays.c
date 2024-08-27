@@ -36,7 +36,7 @@ void PrintQueue(int *queue, int size)
 
 int Enqueue(int *array, int size)
 {
-    int item;
+    int data;
 
     if ((rear + 1) % size == front)
     {
@@ -45,17 +45,17 @@ int Enqueue(int *array, int size)
     }
 
     printf("Enter the element to enqueue: ");
-    scanf("%d", &item);
+    scanf("%d", &data);
 
     if (front == -1 && rear == -1)
     {
         front = rear = 0;
-        array[rear] = item;
+        array[rear] = data;
     }
     else
     {
         rear = (rear + 1) % size;
-        array[rear] = item;
+        array[rear] = data;
     }
 
     return 0;
@@ -63,7 +63,7 @@ int Enqueue(int *array, int size)
 
 int Dequeue(int *array, int size)
 {
-    int item;
+    int data;
 
     if (front == -1 && rear == -1)
     {
@@ -71,7 +71,7 @@ int Dequeue(int *array, int size)
         return -1;
     }
 
-    item = array[front];
+    data = array[front];
 
     if (front == rear)
     {
@@ -82,7 +82,7 @@ int Dequeue(int *array, int size)
         front = (front + 1) % size;
     }
 
-    printf("Dequeued element: %d\n", item);
+    printf("Dequeued element: %d\n", data);
     return 0;
 }
 
