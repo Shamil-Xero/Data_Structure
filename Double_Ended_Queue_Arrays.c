@@ -57,11 +57,6 @@ int AddRight(int *array, int size, int data)
 
 int AddLeft(int *array, int size, int data)
 {
-    for (int i = rear + 1; i >= front; i--)
-        {
-            array[i + 1] = array[i];
-        }
-
     if (rear == size - 1)
     {
         printf("Queue is full. Cannot enqueue.\n");
@@ -75,8 +70,13 @@ int AddLeft(int *array, int size, int data)
     }
     else
     {
+        for (int i = rear + 1; i >= front; i--)
+        {
+            array[i + 1] = array[i];
+        }
         front = 0;
         array[front] = data;
+        rear = (rear + 1) % size;
     }
 
     return 0;
