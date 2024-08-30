@@ -1,5 +1,5 @@
 #include<stdio.h>
-int top = -1, MAX;
+int top = -1;
 
 void Push();
 void Pop();
@@ -8,8 +8,9 @@ void Display();
 
 int main() {
     printf("Enter the maximum size of the stack: ");
-    scanf("%d", &MAX);
-    int stack[MAX],choice;
+    int size, data;
+    scanf("%d", &size);
+    int stack[size],choice;
     do{
         printf("\n1. Push\n2. Pop\n3. Peek\n4. Display\n0. Exit\n");
         printf("Enter your choice: ");
@@ -17,10 +18,13 @@ int main() {
         
         switch (choice) {
             case 1:
-                Push(stack);
+            printf("Enter the data to push: ");
+            scanf("%d", &data);
+                Push(stack, size, data);
                 break;
             case 2:
-                Pop(stack);
+                data = Pop(stack);
+                printf("Popped Element: %d", data);
                 break;
             case 3:
                 Peek(stack);
@@ -38,29 +42,29 @@ int main() {
 }
 
 
-void Push(int stack[]){
-    if (top == MAX - 1) {
+void Push(int stack[], int size, int data)
+{
+    if (top == size - 1)
+    {
         printf("Stack Overflow! Cannot push more elements.\n");
-    } else {
-        printf("Enter an integer to push: ");
-        scanf("%d", &stack[++top]);
+    }
+    else
+    {
+        stack[++top] = data;
     }
 }
 
-void Pop(int stack[]){
-    if (top == -1) {
+int Pop(int stack[])
+{
+    if (top == -1)
+    {
         printf("Stack Underflow! Cannot pop an element.\n");
-    } else {
-        printf("Popped element: %d\n", stack[top--]);
     }
-}
-
-void Peek(int stack[]){
-    if (top == -1) {
-        printf("Stack is empty. Nothing to peek.\n");
-    } else {
-        printf("Top element: %d\n", stack[top]);
+    else
+    {
+        return stack[top--];
     }
+    return 0;
 }
 
 void Display(int stack[]){
@@ -72,5 +76,13 @@ void Display(int stack[]){
             printf("%d ", stack[i]);
         }
         printf("\n");
+    }
+}
+
+void Peek(int stack[]){
+    if (top == -1) {
+        printf("Stack is empty. Nothing to peek.\n");
+    } else {
+        printf("Top element: %d\n", stack[top]);
     }
 }

@@ -36,11 +36,11 @@ int main()
             case 4:
                 Display();
                 break;
-        case 0:
-            printf("\nExiting...\n\n");
-            break;
-        default:
-            printf("Invalid choice. Please try again.\n");
+            case 0:
+                printf("\nExiting...\n\n");
+                break;
+            default:
+                printf("Invalid choice. Please try again.\n");
         }
     } while (choice != 0);
 }
@@ -86,16 +86,6 @@ void Pop()
     free(temp);
 }
 
-void Peek(){
-    if (head == NULL)
-    {
-        printf("Stack is empty\n");
-    }
-    else
-    {
-        printf("Top element is %d\n", head->data);
-    }
-}
 
 void Display()
 {
@@ -112,4 +102,15 @@ void Display()
         temp = temp->next;
     }
     printf("\n");
+}
+
+void Peek(){
+    if (head == NULL)
+    {
+        printf("Stack is empty\n");
+    }
+    else
+    {
+        printf("Top element is %d\n", head->data);
+    }
 }
