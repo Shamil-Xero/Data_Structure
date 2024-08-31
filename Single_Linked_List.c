@@ -72,6 +72,7 @@ void DisplayNodes()
         printf("%d -> ", current->data);
         current = current->next;
     }
+
     printf("NULL\n");
     printf("\n\n--------------------------------\n");
 }
@@ -315,42 +316,3 @@ void CloneLinkedList()
     tail = cloned_tail;
     DisplayNodes();
 }
-
-/*
-void CloneLinkedList(){
-    printf("--------------------------------\n");
-    printf("\nCloning the linked list...\n");
-    struct node *current = head, *new, *temp;
-    while(current->next != NULL){
-        current = current->next;
-        // printf("%d", current->data);
-    }
-    temp = tail = current;
-    current = head;
-    while(current!=temp){
-        new = (struct node *)malloc(sizeof(struct node));
-        if (new == NULL)
-        {
-            printf("Memory error!\n");
-            return;
-        }
-        new->data = current->data;
-        new->next = NULL;
-        tail->next = new;
-        tail = new;
-        current = current->next;
-    }
-    new = (struct node *)malloc(sizeof(struct node));
-        if (new == NULL)
-        {
-            printf("Memory error!\n");
-            return;
-        }
-    new->data = current->data;
-    new->next = NULL;
-    tail->next = new;
-    tail = new;
-    DisplayNodes();
-    return;
-}
-*/
