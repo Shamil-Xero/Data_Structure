@@ -39,15 +39,3 @@ void Pop(char stack[]){
         printf("%c", stack[top--]);
     }
 }
-
-void Display(char stack[]){
-    if (top == -1) {
-        printf("Stack is empty. Nothing to display.\n");
-    } else {
-        printf("Reversed String: ");
-        for (int i = top; i >= 0; i--) {
-            printf("%c", stack[i]);
-        }
-        printf("\n");
-    }
-}
