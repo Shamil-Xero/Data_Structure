@@ -2,7 +2,7 @@
 int top = -1;
 
 void Push();
-void Pop();
+int Pop(int *);
 void Peek();
 void Display();
 
