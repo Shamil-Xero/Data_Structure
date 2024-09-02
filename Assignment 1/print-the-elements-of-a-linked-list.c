@@ -3,3 +3,5 @@ void printLinkedList(SinglyLinkedListNode* head) {
         printf("%d\n", current->data);
     }
 }
+
+//https://www.hackerrank.com/challenges/print-the-elements-of-a-linked-list/problem?isFullScreen=false
