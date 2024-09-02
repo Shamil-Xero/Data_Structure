@@ -1,4 +1,4 @@
-//https://www.hackerrank.com/challenges/compare-two-linked-lists/problem?isFullScreen=false
+// https://www.hackerrank.com/challenges/compare-two-linked-lists/problem?isFullScreen=false
 
 bool compare_lists(SinglyLinkedListNode *head1, SinglyLinkedListNode *head2)
 {
