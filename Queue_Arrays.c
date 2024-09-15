@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int front = -1, rear = -1, size;
+int front = -1; int rear = -1, size;
 
 int *CreateArray(int *array, int size)
 {
@@ -9,88 +9,61 @@ int *CreateArray(int *array, int size)
     return array;
 }
 
-
-
-void ShiftLeft(int *array, int size, int index)
-{
-    for (int i = index; i < size; i++)
-    {
-        array[i] = array[i + 1];
-    }
-}
-
-void PrintQueue(int *queue)
+void PrintQueue(int *queue, int size)
 {
     if (front == -1 && rear == -1)
     {
         printf("Queue is empty.\n");
         return;
     }
-    for (int i = front; i <= rear; i++)
+    int i;
+    for (i = front; i != rear; i = ( i + 1 ) % size)
     {
         printf("%d\t", queue[i]);
     }
-    printf("\n");
+    printf("%d\n", queue[i]);
 }
 
-int Enqueue(int *array, int size)
+int Enqueue(int *array, int size, int data)
 {
-    int item;
-
-    if (rear == size - 1)
+   
+    if ((rear + 1) % size == front)
     {
         printf("Queue is full. Cannot enqueue.\n");
         return -1;
     }
-
-    printf("Enter the element to enqueue: ");
-    scanf("%d", &item);
-
+    
     if (front == -1 && rear == -1)
     {
         front = rear = 0;
-        array[rear] = item;
     }
     else
     {
-        rear = (rear + 1) % size;
-        array[rear] = item;
-    }
-
+        rear = (rear + 1) % size;    
+    }    
+    array[rear] = data;
     return 0;
 }
 
 int Dequeue(int *array, int size)
 {
-    int item;
 
     if (front == -1 && rear == -1)
     {
         printf("Queue is empty. Cannot dequeue.\n");
         return -1;
-    }
-
-    item = array[front];
-
+    }    
+    
+    printf("Dequeued element: %d\n", array[front]);
+    
     if (front == rear)
     {
-        front = rear = -1;
+        front = rear = -1;    
     }
     else
     {
-        front = (front + 1) % size;
+        front = (front + 1) % size;    
     }
-
-    printf("Dequeued element: %d\n", item);
-
-    front--;
-    rear--;
-
-    for (int i = 0; i < size ; i++)
-        {
-            array[i] = array[i + 1];
-        }
-    return 0;
 }
 
 int main()
@@ -111,10 +84,13 @@ int main()
         switch (choice)
         {
         case 1:
-            PrintQueue(queue);
+            PrintQueue(queue, size);
             break;
         case 2:
-            Enqueue(queue, size);
+            printf("Enter the element to enqueue: ");
+            int data;
+            scanf("%d", &data);
+            Enqueue(queue, size, data);
             break;
         case 3:
             Dequeue(queue, size);
