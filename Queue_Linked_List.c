@@ -19,12 +19,7 @@ void InitializeQ(Queue *q)
 {
     q->front = NULL;
     q->rear = NULL;
-}
-
-int is_empty(Queue *q)
-{
-    return q->front == NULL;
-}
+}
 
 void Enqueue(Queue *q, int data)
 {
@@ -32,7 +27,7 @@ void Enqueue(Queue *q, int data)
     new_node->data = data;
     new_node->next = NULL;
 
-    if (is_empty(q))
+    if (q->front == NULL)
     {
         q->front = new_node;
         q->rear = new_node;
@@ -46,7 +41,7 @@ void Enqueue(Queue *q, int data)
 
 int Dequeue(Queue *q)
 {
-    if (is_empty(q))
+    if (q->front == NULL)
     {
         printf("Queue is empty\n");
         return -1;
@@ -69,7 +64,7 @@ int Dequeue(Queue *q)
 
 void DisplayQ(Queue *q)
 {
-    if (is_empty(q))
+    if (q->front == NULL)
     {
         printf("Queue is empty\n");
     }
