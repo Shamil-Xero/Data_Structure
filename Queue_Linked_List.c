@@ -23,19 +23,19 @@ void InitializeQ(Queue *q)
 
 void Enqueue(Queue *q, int data)
 {
-    Node *new_node = (Node *)malloc(sizeof(Node));
-    new_node->data = data;
-    new_node->next = NULL;
+    Node *new = (Node *)malloc(sizeof(Node));
+    new->data = data;
+    new->next = NULL;
 
     if (q->front == NULL)
     {
-        q->front = new_node;
-        q->rear = new_node;
+        q->front = new;
+        q->rear = new;
     }
     else
     {
-        q->rear->next = new_node;
-        q->rear = new_node;
+        q->rear->next = new;
+        q->rear = new;
     }
 }
 
