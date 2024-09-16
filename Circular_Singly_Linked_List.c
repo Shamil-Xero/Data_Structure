@@ -8,13 +8,6 @@ typedef struct node
     struct node *next;
 } node;
 
-// typedef struct List
-// {
-//     struct node **head;
-//     struct node **tail;
-//     int size;
-// } List;
-
 node *head = NULL;
 node *tail = NULL;
 
@@ -27,10 +20,10 @@ void DisplayNodes(node *head)
     {
         while (current->next != head)
         {
-            printf("%d %d %d -> ", current, current->data, current->next);
+            printf("%d %d %d -> ", current->data);
             current = current->next;
         }
-        printf("%d %d %d -> ", current, current->data, current->next);
+        printf("%d %d %d -> ", current->data);
         current = current->next;
     }
 

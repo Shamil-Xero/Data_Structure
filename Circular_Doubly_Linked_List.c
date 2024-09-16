@@ -20,10 +20,10 @@ void DisplayNodes(node *head)
     {
         do
         {
-            printf("%d %d %d <-> ", current, current->data, current->next);
+            printf("%d <-> ", current->data);
             current = current->next;
         } while (current != head);
-        printf("%d %d %d\n", current, current->data, current->next);
+        printf("%d\n", current->data);
     }
     printf("\n\n--------------------------------\n");
 }
