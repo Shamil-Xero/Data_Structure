@@ -7,28 +7,26 @@ int *initArray(int size){
 }
 
 void fillArray(int *array, int size){
-<<<<<<< Tabnine <<<<<<<
-/**//+
- * @brief Initializes a dynamically allocated array of integers.//+
- *//+
- * This function creates a new array of integers with the specified size,//+
- * initializing all elements to zero using calloc.//+
- *//+
- * @param size The number of elements to allocate in the array.//+
- * @return int* A pointer to the newly allocated and initialized array,//+
- *         or NULL if the allocation fails.//+
- *///+
-int *initArray(int size){//+
-    int *array = calloc(size, sizeof(int));//+
-    return array;//+
-}//+
->>>>>>> Tabnine >>>>>>>// {"conversationId":"b2b89f86-7eec-4df4-8fb6-a7f3172529a6","source":"instruct"}
+
     for (int i = 0; i < size; i++) {
         scanf("%d", &array[i]);
     }
 }
 
+void sortArray(int *array, int size){
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = i + 1; j < size; j++) {
+            if (array[i] > array[j]) {
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+    }
+}
+
 int binarySearch(int *array, int size, int target) {
+    sortArray(array,size);
     int left = 0;
     int right = size - 1;
 
