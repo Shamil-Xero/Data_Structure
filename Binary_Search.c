@@ -65,5 +65,6 @@ int main() {
         printf("Element %d not found in the array\n\n", target);
     }
 
+    free(array); 
     return 0;
 }
