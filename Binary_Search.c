@@ -31,7 +31,7 @@ int binarySearch(int *array, int size, int target) {
     int low = 0;
     int high = size - 1;
 
-    while (left <= right) {
+    while (low <= high) {
         int mid = low + (high - low) / 2;
 
         if (array[mid] == target) {
