@@ -28,20 +28,20 @@ void sortArray(int *array, int size){
 
 int binarySearch(int *array, int size, int target) {
     sortArray(array,size);
-    int left = 0;
-    int right = size - 1;
+    int low = 0;
+    int high = size - 1;
 
     while (left <= right) {
-        int mid = left + (right - left) / 2;
+        int mid = low + (high - low) / 2;
 
         if (array[mid] == target) {
             return mid;
         }
 
         if (array[mid] < target) {
-            left = mid + 1;
+            low = mid + 1;
         } else {
-            right = mid - 1;
+            high = mid - 1;
         }
     }
 
