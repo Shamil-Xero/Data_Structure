@@ -6,6 +6,7 @@ int *initArray(int size){
     return array;
 }
 
+
 void fillArray(int *array, int size){
 
     for (int i = 0; i < size; i++) {
