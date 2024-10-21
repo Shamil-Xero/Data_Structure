@@ -7,8 +7,7 @@ int *initArray(int size){
 }
 
 
-void fillArray(int *array, int size){
-
+void fillArray(int *array, int size){
     for (int i = 0; i < size; i++) {
         scanf("%d", &array[i]);
     }
