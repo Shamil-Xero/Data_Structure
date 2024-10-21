@@ -23,7 +23,6 @@ void insertionSort(int *array, int size) {
     int i, key, j;
     for (i = 1; i < size; i++) {
         key = array[i];
-        j = i - 1;
 
         for (j = i - 1; j >= 0 && array[j] > key; j--) {
             array[j + 1] = array[j];
