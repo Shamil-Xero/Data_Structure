@@ -59,20 +59,18 @@ void merge(int *array, int left, int mid, int right) {
     }
 }
 
-void mergeSortHelper(int *array, int left, int right) {
+void mergeSort(int *array, int left, int right) {
     if (left < right) {
         int mid = left + (right - left) / 2;
 
-        mergeSortHelper(array, left, mid);
-        mergeSortHelper(array, mid + 1, right);
+        mergeSort(array, left, mid);
+        mergeSort(array, mid + 1, right);
 
         merge(array, left, mid, right);
     }
+
 }
 
-void mergeSort(int *array, int size) {
-    mergeSortHelper(array, 0, size - 1);
-}
 
 int main() {
     printf("\nEnter the number of elements: ");
@@ -86,7 +84,7 @@ int main() {
     displayArray(array, size);
 
     printf("After sorting the array:\n");
-    selectionSort(array, size);
+    mergeSort(array, 0, size - 1);
     displayArray(array, size);
 
     free(array); 
