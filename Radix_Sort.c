@@ -82,7 +82,7 @@ int main()
     printf("The elements in the array are:\n");
     displayArray(array, size);
     printf("After sorting the array:\n");
-    countingSort(array, size, 1);
+    radixSort(array, size);
     displayArray(array, size);
     free(array);
     return 0;
