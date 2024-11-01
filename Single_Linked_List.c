@@ -1,15 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 struct node
 {
     int data;
-    struct node *prev, *next;
+    struct node *next;
 };
 
 struct node *head, *tail;
-
 
 void DisplayNodes()
 {
@@ -21,6 +19,7 @@ void DisplayNodes()
         printf("%d -> ", current->data);
         current = current->next;
     }
+
     printf("NULL\n");
     printf("\n\n--------------------------------\n");
 }
@@ -36,8 +35,7 @@ void CreateHeadNode()
         return;
     }
     scanf("%d", &head->data);
-    head->prev = head->next = NULL;
-    tail = head;
+    head->next = NULL;
     printf("Head node created with data: %d\n", head->data);
     printf("\n\n--------------------------------\n");
 }
@@ -63,20 +61,18 @@ void InsertNode()
     if (position == 1)
     {
         new->next = head;
-        new->prev = NULL;
-        if (head != NULL)
-        {
-            head->prev = new;
-        }
         head = new;
         printf("Node inserted at the start\n");
     }
     else if (position < 0)
     {
-        tail->next = new;
-        new->prev = tail;
+        struct node *current = head;
+        while (current->next != NULL)
+        {
+            current = current->next;
+        }
+        current->next = new;
         new->next = NULL;
-        tail = new;
         printf("Node inserted at the end\n");
     }
     else
@@ -93,14 +89,12 @@ void InsertNode()
         if (current->next != NULL)
         {
             new->next = current->next;
-            new->prev = current;
             current->next = new;
-            new->next->prev = new;
             printf("Node inserted at position: %d\n", position);
         }
         else
         {
-            printf("\nPosition Out of range! So no node was inserted\n");
+            printf("\nPosition Out of range! So node inserted\n");
         }
     }
     DisplayNodes();
@@ -115,49 +109,33 @@ void DeleteNode()
     struct node *current = head, *previous;
     if (position == 1)
     {
-        if (current->next != NULL)
-        {
-            current->next->prev = NULL;
-        }
         head = current->next;
         printf("First node is deleted\n");
     }
     else if (position < 0)
     {
-        current = tail;
-        if (current->prev != NULL)
+        while (current->next != NULL)
         {
-            current->prev->next = NULL;
+            previous = current;
+            current = current->next;
         }
-        tail = current->prev;
+        previous->next = NULL;
         printf("Last node is deleted\n");
     }
     else
     {
         for (int i = 1; i < position; i++)
         {
+            previous = current;
             current = current->next;
             if (current == NULL)
             {
-                printf("Broken node");
                 break;
             }
         }
         if (current != NULL)
         {
-            if (current == tail)
-            {
-                if (current->prev != NULL)
-                {
-                    current->prev->next = NULL;
-                }
-                tail = current->prev;
-            }
-            else
-            {
-                current->next->prev = current->prev;
-                current->prev->next = current->next;
-            }
+            previous->next = current->next;
             printf("\nNode on position %d is deleted\n", position);
         }
         else
@@ -168,6 +146,7 @@ void DeleteNode()
     free(current);
     DisplayNodes();
 }
+
 
 void main()
 {
@@ -227,7 +206,6 @@ void main()
 //     {
 //         printf("\nNode with data %d not found\n", search_data);
 //     }
-//     printf("\n--------------------------------\n");
 // }
 
 // void SortNodes()
@@ -281,54 +259,5 @@ void main()
 //         return;
 //     }
 
-//     DisplayNodes();
-// }
-
-// void ReverseLinkedList()
-// {
-//     printf("--------------------------------\n");
-//     printf("\nReversing the linked list...\n");
-//     struct node *current, *temp;
-//     tail = head;
-//     for (current = tail; current != NULL; current = current->prev)
-//     {
-//         temp = current->next;
-//         current->next = current->prev;
-//         current->prev = temp;
-//         head = current;
-//     }
-//     DisplayNodes();
-// }
-
-// void CloneLinkedList()
-// {
-//     printf("--------------------------------\n");
-//     printf("\nCloning the linked list...\n");
-//     struct node *current, *new, *cloned_head = NULL, *cloned_tail = NULL;
-//     for (current = head; current != NULL; current = current->next)
-//     {
-//         new = (struct node *)malloc(sizeof(struct node));
-//         if (new == NULL)
-//         {
-//             printf("Memory error!\n");
-//             return;
-//         }
-//         new->data = current->data;
-//         if (cloned_head == NULL && cloned_tail == NULL)
-//         {
-//             new->prev = new->next = NULL;
-//             cloned_tail = cloned_head = new;
-//         }
-//         else
-//         {
-//             new->next = NULL;
-//             new->prev = cloned_tail;
-//             cloned_tail->next = new;
-//             cloned_tail = new;
-//         }
-//     }
-//     cloned_head->prev = tail;
-//     tail->next = cloned_head;
-//     tail = cloned_tail;
 //     DisplayNodes();
 // }

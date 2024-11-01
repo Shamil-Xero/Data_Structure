@@ -7,7 +7,8 @@ int *initArray(int size){
 }
 
 
-void fillArray(int *array, int size){
+void fillArray(int *array, int size){
+
     for (int i = 0; i < size; i++) {
         scanf("%d", &array[i]);
     }
@@ -27,20 +28,20 @@ void sortArray(int *array, int size){
 
 int binarySearch(int *array, int size, int target) {
     sortArray(array,size);
-    int low = 0;
-    int high = size - 1;
+    int left = 0;
+    int right = size - 1;
 
-    while (low <= high) {
-        int mid = low + (high - low) / 2;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
 
         if (array[mid] == target) {
             return mid;
         }
 
         if (array[mid] < target) {
-            low = mid + 1;
+            left = mid + 1;
         } else {
-            high = mid - 1;
+            right = mid - 1;
         }
     }
 
@@ -64,6 +65,5 @@ int main() {
         printf("Element %d not found in the array\n\n", target);
     }
 
-    free(array); 
     return 0;
 }

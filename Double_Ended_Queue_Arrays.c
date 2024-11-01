@@ -9,8 +9,6 @@ int *CreateArray(int *array, int size)
     return array;
 }
 
-
-
 void ShiftLeft(int *array, int size, int index)
 {
     for (int i = index; i < size; i++)

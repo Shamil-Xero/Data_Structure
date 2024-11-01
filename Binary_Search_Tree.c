@@ -32,7 +32,7 @@ Node *insert(Node *root, int data)
     {
         (root)->left = insert((root)->left, data);
     }
-    else
+    else if(data > (root)->data)
     {
         (root)->right = insert((root)->right, data);
     }
@@ -86,6 +86,17 @@ Node *delete(Node *root, int data)
     return root;
 }
 
+void search(Node *root, int data){
+    if(root==NULL)
+        printf("Element not found\n");
+    else if(data<root->data)
+        search(root->left,data);
+    else if(data>root->data)
+        search(root->right,data);
+    else
+        printf("Element found\n");
+}
+
 // Traversal of the BST
 void inOrderTraversal(Node *root)
 {
@@ -130,23 +141,25 @@ int main()
     //     root = insert(root, data);
     // }
 
-    root = insert(root, 2);
+    root = insert(root, 20);
     root = insert(root, 65);
     root = insert(root, 4);
     root = insert(root, 21);
     printf("\n\nIn-order traversal of the BST: ");
     inOrderTraversal(root);
-    root = delete(root, 2);
+    printf("\n\nPre-order traversal of the BST: ");
+    preOrderTraversal(root);
+    printf("\n\nPost-order traversal of the BST: ");
+    postOrderTraversal(root);
+    root = delete(root, 20);
     root = delete(root, 65);
     root = insert(root, 42);
     root = insert(root, 3);
+    printf("\n\nAfter Deletion:");
     printf("\n\nIn-order traversal of the BST: ");
     inOrderTraversal(root);
+    printf("\n\n");
 
-    // printf("\n\nPre-order traversal of the BST: ");
-    // preOrderTraversal(root);
-    // printf("\n\nPost-order traversal of the BST: ");
-    // postOrderTraversal(root);
 
     return 0;
 }

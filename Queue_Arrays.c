@@ -3,9 +3,8 @@
 
 int front = -1; int rear = -1, size;
 
-int *CreateArray(int *array, int size)
-{
-    array = (int *)malloc(size * sizeof(int));
+int *initArray(int size){
+    int *array = calloc(size, sizeof(int));
     return array;
 }
 
@@ -72,7 +71,7 @@ int main()
     printf("Enter the size of the array: ");
     scanf("%d", &size);
 
-    int *queue = CreateArray(queue, size);
+    int *queue = initArray(size);
 
     do
     {
