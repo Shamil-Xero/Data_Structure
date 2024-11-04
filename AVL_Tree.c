@@ -157,10 +157,8 @@ Node *deleteNode(Node *root, int data)
         }
         else
         {
-            Node *temp = minValueNode(root->right);
-
-            root->data = temp->data;
-
+            Node *temp = minValueNode(root->right);
+            root->data = temp->data;
             root->right = deleteNode(root->right, temp->data);
         }
     }
